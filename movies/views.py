@@ -78,7 +78,6 @@ def recommendations_view(request):
         'message': None if recommended_movies else 'No new recommendations found.'
     })
 
-# Login View
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
@@ -86,7 +85,7 @@ def login_view(request):
             user = form.get_user()
             login(request, user)
             messages.success(request, "You have successfully logged in.")
-            return redirect('home')  # Redirect to home page after login
+            return redirect('home')  
         else:
             messages.error(request, "Invalid username or password.")
     else:
@@ -94,19 +93,21 @@ def login_view(request):
 
     return render(request, 'movies/login.html', {'form': form})
 
-# Register View
+
+
 def register_view(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
-            messages.success(request, 'Registration successful! You can now log in.')
-            return redirect('login')  # Redirect to login page after registration
+            messages.success(request, 'Registration successfull You can now log in.')
+            return redirect('login')  
     else:
         form = UserCreationForm()
-
     return render(request, 'movies/register.html', {'form': form})
+
+
 
 @login_required
 def rate_movies_view(request):
@@ -122,7 +123,7 @@ def rate_movies_view(request):
                     defaults={'rating': rating_val}
                 )
         messages.success(request, "Ratings submitted successfully!")
-        return redirect('recommendations')
+        return redirect('home')
 
     user_rated = Rating.objects.filter(user=request.user)
     user_ratings = {r.movie.id: r.rating for r in user_rated}
