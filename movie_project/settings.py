@@ -65,11 +65,11 @@ WSGI_APPLICATION = 'movie_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'movie_recommender',
+        'NAME': 'movie_project',
         'USER': 'postgres',
         'PASSWORD': '@baraghare01',
         'HOST': 'localhost',
-        'PORT': '5432',
+        'PORT': '5433',
     }
 }
 # Password validation
